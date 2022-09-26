@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>Relief</title>
+
+    <link rel="stylesheet" href="https://uky-gis.github.io/geo509/slides/dist/reset.css" />
+    <link rel="stylesheet" href="https://uky-gis.github.io/geo509/slides/dist/reveal.css" />
+    <link rel="stylesheet" href="https://uky-gis.github.io/geo509/slides/dist/theme/league-109.css" id="theme" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="https://uky-gis.github.io/geo509/slides/dist/plugin/highlight/zenburn.css" id="highlight-theme" />
+    <style>
+        /* UK Colors: 
+                #c7c9c8 light gray 
+                #63666a dark gray
+                #15397f dark blue
+                #009bda light blue
+                #0033a0 official blue
+            */
+
+        .top-module {
+            position: absolute;
+            bottom: 1.5em;
+            left: 20px;
+            z-index: 3333;
+            font-size: 0.5em;
+            opacity: 0.5;
+        }
+
+        .item-download {
+            position: absolute !important;
+            /* left: 0 !important;
+      bottom: 0 !important; */
+            transform: translate(calc(100vw/2*-1), 100px) !important;
+            z-index: 9999;
+            font-size: 0.5em;
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="top-module"><a target='_blank' href="https://github.com/uky-gis/pro-relief/">Repo</a></div>
+        <div class="slides">
+            <section data-pre-load
+                data-background-image="https://outragegis.com/weather/img/animation/yesterday/LookRock.gif"
+                data-background-opacity="0.4">
+                <h5>Custom Shaded Reliefs</h5>
+				<h4>Join along @<a href="https://boyd.xyz/w">boyd.xyz/w</a></h4>
+                <!-- <h2>Welcome</h2> -->
+                <div class="ll" style="opacity:60%;">
+                    Yesterday in the Great Smokies<br />Webcam
+                    <a href="https://www.outragegis.com/weather/img/animation" target="_blank">archive</a>
+                </div>
+                <div class='lr'>Using lidar derivatives in ArcGIS Pro, Blender, and Python Notebooks</div>
+            </section>
+            <section data-pre-load
+                data-background-image="https://outragegis.com/weather/img/animation/yesterday/LookRock.gif"
+                data-background-opacity="0.4">
+                <img width="100%" src="https://uky-gis.github.io/geo509/slides/images/logo-uk-geo.png" />
+
+            </section>
+
+            <section class='left'
+                data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+                data-background-opacity="0.2">
+                <h3>Long tradition in cartography of making custom shaded reliefs.</h3>
+                
+            </section>
+
+            <section class='left'
+                data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+                data-background-opacity="0.2">
+                <h3 class="r-fit-text">
+                    Accuracy 
+                    <span class="fragment">&</span>
+                    <span class="fragment">Atmosphere</span>
+                    </h3>
+            </section>
+
+            <section class='left'
+                data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+                data-background-opacity="0.2">
+                <h3 class="r-fit-text">
+                    LiDAR
+                    <span class="fragment">-></span>
+                    <span class="fragment">above-ground</span>
+                    </h3>
+            </section>
+            <section class='left'
+                data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+                data-background-opacity="0.2">
+                <h3 class="r-fit-text">
+                    Hillshade
+                    <span class="fragment">a DSM</span>
+                    <span class="fragment">duh</span>
+                    </h3>
+            </section>
+            <section class='left'
+            data-background-image='images/cave-run-pro.jpg'
+            data-background-opacity="1">
+        </section>
+
+        <section class='left'
+            data-background-image='images/cave-run-blender.jpg'
+            data-background-opacity="1">
+        </section>
+            <section class='left'
+                data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+                data-background-opacity="0.2">
+                <h3>Examples</h3>
+                <ul>
+        
+                       <li>
+                        Raster tile sets 
+                        <ul>
+                            <li >
+                                <a href="https://www.outragegis.com/gorge/map/" target="_blank">Red River Gorge DEM, Phase 1</a>
+                            </li>
+                            <li >
+                                <a href="https://uky-gis.github.io/geo509/maps/dsm/" target="_blank">Lexington DSM, Phase 2</a>
+                            </li>
+                            <li >
+                                <a href="https://uky-gis.github.io/geo509/maps/dsm/" target="_blank">Kentucky DEM, 10m pre-lidar</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li >
+                        Michele McHugh's map of
+                         <a href="https://mcchele.github.io/Wolf-Creek-Dam/" target="_blank">Wolf Creek Dam</a>
+                     </li>
+                </ul>
+            </section>
+
+           
+
+            <section data-pre-load
+                data-background-iframe="https://www.outragegis.com/gorge/map/"
+                data-background-opacity="1">
+            </section>
+
+            <section data-pre-load
+                data-background-iframe="https://uky-gis.github.io/geo509/maps/dsm/"
+                data-background-opacity="1">
+            </section>
+
+            <section data-pre-load
+                data-background-iframe="https://outragegis.com/t/fet.php"
+                data-background-opacity="1">
+            </section>
+
+            <section class='left'
+                data-background-image='images/wolf-creek-dam.jpg'
+                data-background-opacity="1"
+                data-background-color="white"
+                data-background-size="contain">
+            </section>
+
+            <section class='left'
+                data-background-image='images/wolf-creek-dam-2.jpg'
+                data-background-opacity="1">
+            </section>
+
+
+            
+
+            <section data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+                data-background-opacity="0.3">
+                <h2 class='r-fit-text'>02: Infrastructure</h2>
+
+            </section>
+            <section class='left'
+                data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+                data-background-opacity="0.2">
+                <h3>Goals</h3>
+                Use lidar point clouds and their derivatives to describe the dimensions of flood-prone infrastructure and visualize the results. Primarily, we will try to find the bridge deck height above stream crossings and attribute the bridge point data made in the previous lab.
+            </section>
+            
+            <section class='left'
+                data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+                data-background-opacity="0.2">
+                <h3>Task 2</h3>
+                <ul>
+                    <li class='fragment'>
+                        <a href='https://uk.instructure.com/courses/2045365/assignments/11279551' target='_blank'>Geodatabase of bridges</a>
+                    </li>
+                </ul>
+            </section>
+            <section class='left'
+                data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+                data-background-opacity="0.2">
+                <h3>Module downloads</h3>
+                <ul>
+                    <li class='fragment'>
+                        Decompress and save to your root GIS folder
+                    </li>
+                    <li class='fragment'>
+                        tools > <a href='https://nyc3.digitaloceanspaces.com/astoria/geo509/geo509-tools-02.zip' target='_blank'>toolbox and laszip64.exe</a>
+                    </li>
+                    <li class='fragment'>
+                        data > <a href='https://ky.app.box.com/v/kymartian-kyaped-5k-tile-grids' target='_blank'>lidar tile grid layer</a>
+                    </li>
+                </ul>
+            </section>
+            <section data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+                data-background-opacity="0.3">
+                <h2 class='r-fit-text'>LiDAR</h2>
+            </section>
+            
+            <section class='left'
+            data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+            data-background-opacity="0.2">
+            <h3>Lidar</h3>
+            <ul>
+                <li class='fragment'>
+                    Light detection and ranging.
+                </li>
+                <li class='fragment'>
+                    Active sensor
+                </li>
+                <li class='fragment'>
+                    with multiple returns and attributes.
+                </li>
+                <li class='fragment'>
+                    Creates a point cloud (massively sampled locations).
+                </li>
+            </ul>
+        </section>
+
+        <section class='left' data-background-image='http://ucanr.org/blogs/Green/blogfiles/10250.png' 
+            data-background-color="#fff"
+            data-background-opacity="1"
+            data-background-size="contain"
+            >
+        </section>
+
+        <section class='left' data-background-image='images/point-cloud.jpg' 
+            data-background-color="#fff"
+            data-background-opacity="1"
+            >
+        </section>
+
+        <section class='left'
+            data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+            data-background-opacity="0.2">
+            <h3>Point cloud attributes</h3>
+            <ul>
+                <li class='fragment'>
+                    x, y, z position
+                </li>
+                <li class='fragment'>
+                    time
+                </li>
+                <li class='fragment'>
+                    intensity of return
+                </li>
+                <li class='fragment'>
+                    Algorithms classify point, e.g., ground, vegetation, building, etc., and assign a class value.
+                </li>
+            </ul>
+        </section>
+
+        <section class='left'
+            data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+            data-background-opacity="0.2">
+            <h3>Airborne lidar</h3>
+            <ul>
+                <li class='fragment'>
+                    Massive sampling of earth's surface by plane.
+                </li>
+                <li class='fragment'>
+                    Uses GPS and IMU (inertia measurement unit) to map point.
+                </li>
+                <li class='fragment'>
+                    While can penetrate canopy, cannot 'see' under solid structures.
+                </li>
+                <li class='fragment'>
+                    I.e., cannot see under our arches, bridges, overhangs.
+                </li>
+            </ul>
+        </section>
+
+        <section class='left'
+            data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+            data-background-opacity="0.2">
+            <h3>Terrestrial lidar</h3>
+            <ul>
+                <li class='fragment'>
+                    Ground-based sampling.
+                </li>
+                <li class='fragment'>
+                    Can build true 3D model, e.g., see under and inside.
+                </li>
+                <li class='fragment'>
+                    Increasingly available in consumer products.
+            </ul>
+        </section>
+
+        <section data-background-iframe='https://nyc3.digitaloceanspaces.com/astoria/xyz/indian-arch/index.html'
+            data-background-color="#fff" data-background-interactive data-background-opacity="1">
+            <!-- <h6 class="r-fit-text">Measuring arches</h6> -->
+        </section>
+
+        <section data-background-iframe='https://nyc3.digitaloceanspaces.com/astoria/xyz/wh-lab/index.html'
+            data-background-color="#fff" data-background-interactive data-background-opacity="1">
+            <!-- <h6 class="r-fit-text">Measuring arches</h6> -->
+        </section>
+        <section class='left'
+            data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+            data-background-opacity="0.2">
+            <h3>Kentucky project</h3>
+            <ul>
+                <li class='fragment'>
+                    <a target='_blank' href='https://kyfromabove.ky.gov/'>Kentucky Aerial Photography & Elevation Data (KYAPED) program</a>
+
+                </li>
+                <li class='fragment'>
+                    Collected during leaf-off conditions
+                    <ul>
+                        <li class='fragment'>
+                            no snow and water levels at or below normal.
+                        </li>
+                    </ul>
+                </li>
+                <li class='fragment'>
+                    Point cloud has max 2.23-foot point horizontal spacing.
+                </li>
+            </ul>
+        </section>
+
+    <section class='left'
+            data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+            data-background-opacity="0.2">
+            <h3>Goals</h3>
+            <ul>
+                <li class='fragment'>
+                    Create elevation products for bare-earth conditions. 
+                </li>
+                <li class='fragment'>
+                    A statewide 5-ft resolution DEM is now available.
+                </li>
+                    <li class='fragment'>
+                        Collection 2010–present.
+                    </li>
+                    <li class='fragment'>
+                        Two phases with different resolutions.
+                    </li>
+                    <li class='fragment'>
+                        Completely free.
+                    </li>
+                </ul>
+            </ul>
+        </section>
+
+    <section class='left'
+            data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+            data-background-opacity="0.2">
+            <h3>Classification</h3>
+            <ul>
+                <li class='fragment'>
+                    Algorithms classify point
+                </li>
+                <li class='fragment'>
+                    as ground, noise, or unassigned.
+                </li>
+                <li class='fragment'>
+                    Unassigned points are above-ground features.
+                </li>
+                
+            </ul>
+        </section>
+        <section  data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+        data-background-opacity="0.2" data-markdown data-separator="___" data-background-color=#2D2D2D>
+        <textarea data-template>
+
+
+| KY classes | Meaning|
+|-------------|-----------:|
+|1 |Processed, but Unassigned (above ground features) |
+|2 |Bare-earth or ground|
+|7 & 18 |Noise (e.g., birds. Can be low or high, manually identified, if needed)|
+|9 |Water|
+|10 |Ignored Ground (Breakline Proximity)|
+            
+            </textarea>
+
+    </section>
+
+        <section class='left' data-background-image='../images/terrabytes27.gif' data-background-opacity="0.6">
+            <h3>Lidar challenge</h3>
+            <ul>
+                <li class='fragment'>
+                    Massive file size
+                </li>
+                
+                <li class='fragment'>
+                    State divided into 46,105 tiles
+                </li>
+                <li class='fragment'>
+                    with one tile ~ 500 MB.
+                </li>
+                <li class='fragment'>
+                    Difficult to visualize <span class="fragment">(today).</span>
+                </li>
+                <li class='fragment'>
+                    How to handle these file sizes?
+                </li>
+            </ul>
+        </section>
+
+        <section data-background-iframe='https://uky-gis.github.io/geo509/maps/dsm/'
+            data-background-color="#fff" data-background-interactive data-background-opacity="1">
+            <h6 class="r-fit-text">9 GB point cloud ➡️ 250 MB raster</h6>
+        </section>
+
+        <section class='left'
+            data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+            data-background-opacity="0.2">
+            <h2 class='r-fit-text'>Point cloud Derivatives</h2>
+            Airborne point clouds can be reduced to high-resolution raster imagery.
+            
+        </section>
+
+        <section class='left'
+            data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+            data-background-opacity="0.2">
+            <h3>DEM</h3>
+            <ul>
+                <li class='fragment'>
+                    Digital Elevation Model
+                </li>
+                <li class='fragment'>
+                    Most often bare-earth surface
+                </li>	
+                <li class='fragment'>
+                    Point cloud class code 2
+                </li>		
+            </ul>
+        </section>
+
+        <section class='left'
+            data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+            data-background-opacity="0.2">
+            <h3>DSM</h3>
+            <ul>
+                <li class='fragment'>
+                    Digital Surface Model
+                </li>
+                <li class='fragment'>
+                    Includes the reflected surface
+                    <ul>
+                        <li class='fragment'>
+                            buildings, trees, bridges, etc.
+                        </li>
+                    </ul>
+                </li>
+                <li class='fragment'>
+                    Point cloud class codes 1, 2, 9, 17
+                </li>				
+            </ul>
+        </section>
+        
+
+    
+        <section class='left'
+            data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+            data-background-opacity="0.2">
+            <h3>Data file formats</h3>
+            <ul>
+                <li class='fragment'>
+                    LAS file
+                    <ul>
+                        <li class='fragment'>
+                            <i>Laser</i> format most common in GIS
+                        </li>
+                    </ul>
+                </li>
+                <li class='fragment'>
+                    LAZ file
+                    <ul>
+                        <li class='fragment'>
+                            A compressed LAS file
+                        </li>
+                        <li class='fragment'>
+                            Most common storage format
+                        </li>
+                        <li class='fragment'>
+                            Need a separate utility to decompress and use in ArcGIS Pro.
+                            <ul>
+                                <li class='fragment'>
+                                    laszip.exe include in our tools folder
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>				
+            </ul>
+        </section>
+        <section data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+                data-background-opacity="0.3">
+                <h2 class='r-fit-text'>PRACTICE</h2>
+        </section>
+        <section class='left'
+            data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+            data-background-opacity="0.2">
+            <h3>Create new ArcGIS Pro project</h3>
+            <ul>
+                <li class='fragment'>
+                    Create a folder in your project called
+                    <ul>
+                        <li class='fragment'>
+                            las
+                        </li>
+                    </ul>
+                </li>
+                <li class='fragment'>
+                    Load the Kentucky_5k_PointCloudGrid layer from the downloaded GDB.
+                </li>
+                <li class='fragment'>
+                    Download two adjacent tiles
+                    <ul>
+                        <li class='fragment'>
+                            Make sure they are the same Phase, i.e., same version.
+                        </li>
+                    </ul>
+                </li>				
+            </ul>
+        </section>
+        <section data-background-image='images/01.jpg'
+                data-background-opacity="1"
+                data-background-size="fit"
+                data-background-color="white">
+        </section>
+        <section class='left'
+            data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+            data-background-opacity="0.2">
+            <h3>Decompress</h3>
+            <ul>
+                <li class='fragment'>
+                    Drag and drop the LAZ file, one by one, onto the laszip.exe application
+                </li>
+                <li class='fragment'>
+                    Verify that you have two LAS files.
+                </li>			
+            </ul>
+        </section>
+
+        <section class='left'
+            data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+            data-background-opacity="0.2">
+            <h3>Create LAS dataset</h3>
+            <ul>
+                <li class='fragment'>
+                    Treat multiple tiles as a single layer.
+                </li>
+                <li class='fragment'>
+                    Visualize in a new Scene.
+                </li>			
+            </ul>
+        </section>
+
+
+        <section class='left'
+            data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+            data-background-opacity="0.2">
+            <h3>Steps in model creation</h3>
+            <ul>
+                <li class='fragment'>
+                    Filter point cloud
+                </li>
+                <li class='fragment'>
+                    Make LAS dataset layer (temporary)
+                </li>
+                <li class='fragment'>
+                    Rasterize LAS dataset layer
+                </li>			
+            </ul>
+        </section>
+            
+        <section data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+                data-background-opacity="0.3">
+                <h2 class='r-fit-text'>WORKFLOW</h2>
+        </section>
+        <section class='left'
+            data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+            data-background-opacity="0.2">
+            <h3>A preview</h3>
+            <ul>
+                <li class='fragment'>
+                    Model builder tools to create data and analysis for our locations.
+                </li>
+                <li class='fragment'>
+                    Video <a href="tutorial"></a> 
+                </li>		
+            </ul>
+        </section>
+        <section data-background-image='images/02.jpg'
+                data-background-opacity="1"
+                data-background-size="fit"
+                data-background-color="white">
+        </section>
+        <section data-background-image='images/06.jpg'
+                data-background-opacity="1"
+                data-background-size="contain"
+                data-background-color="white">
+        </section>
+        <section data-background-image='images/03.jpg'
+                data-background-opacity="1"
+                data-background-size="fit"
+                data-background-color="white">
+        </section>
+        <section data-background-image='images/04.jpg'
+                data-background-opacity="1"
+                data-background-size="fit"
+                data-background-color="white">
+        </section>
+        <section data-background-image='images/05.jpg'
+                data-background-opacity="1"
+                data-background-size="fit"
+                data-background-color="white">
+        </section>
+        <section class='left'
+                data-background-image='https://nyc3.digitaloceanspaces.com/astoria/geo409/apps/img/wt-header.jpg'
+                data-background-opacity="0.2">
+                <h1 class="r-fit-text">STOP</h1>
+        </section>
+
+        </div>
+    </div>
+
+    <script src="https://uky-gis.github.io/geo509/slides/dist/reveal.js"></script>
+    <script src="https://uky-gis.github.io/geo509/slides/dist/plugin/notes/notes.js"></script>
+    <script src="https://uky-gis.github.io/geo509/slides/dist/plugin/markdown/markdown.js"></script>
+    <script src="https://uky-gis.github.io/geo509/slides/dist/plugin/highlight/highlight.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            hash: true,
+            backgroundTransition: "fade",
+            // Transition style
+            transition: "fade", // none/fade/slide/convex/concave/zoom
+
+            // Transition speed
+            transitionSpeed: "fast", // default/fast/slow
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        });
+    </script>
+</body>
+
+</html>
